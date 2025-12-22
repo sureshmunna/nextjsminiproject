@@ -1,0 +1,13 @@
+import Sidebar from "@/Components/Sidebar";
+import { ReactNode } from "react";
+
+export default function DashboardLayout({children} :{children : ReactNode}){
+    return(
+        <div className="flex h-screen">
+            <Sidebar/>
+            <div className="flex flex-col flex-1">
+                <main className="p-6 bg-gray-100 h-full overflow-y-auto">{children}</main>
+            </div>
+        </div>
+    )
+}
