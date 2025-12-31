@@ -1,4 +1,4 @@
-
+"use client"
 
 import { Home, Menu, Settings, User } from "lucide-react"
 import Link from "next/link"
@@ -6,36 +6,84 @@ import { createContext, ReactNode, useState } from "react";
 import { useSidebar } from "./SidebarContext";
 
 
-interface SidebarContextType {
-    collapsed : boolean;
-    toggle : () =>void;
-}
+// interface SidebarContextType {
+//     collapsed : boolean;
+//     toggle : () =>void;
+// }
 
-const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
+// const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
 
-export function SidebarProvider({children}:{children : ReactNode}){
-    const [collapsed,setCollapsed] = useState(false);
-    const toggle = ()=> setCollapsed((prev)=>!prev);
+// export function SidebarProvider({children}:{children : ReactNode}){
+//     const [collapsed,setCollapsed] = useState(false);
+//     const toggle = ()=> setCollapsed((prev)=>!prev);
 
-    return (
-        <SidebarContext.Provider value={{collapsed,toggle}}>{children}</SidebarContext.Provider>
-    )
-}
+//     return (
+//         <SidebarContext.Provider value={{collapsed,toggle}}>{children}</SidebarContext.Provider>
+//     )
+// }
 
 export default function Sidebar(){
     const {collapsed} = useSidebar();
 
     return (
-        <aside className={`h-full bg-gray-900 text-white transition-all duration-300 ${
-            collapsed ? "w-16" : "w-64"}`}>
-                <div className="flex items-center gap-3 mb-6">
+        // <aside className={`h-full bg-gray-900 text-white transition-all duration-300 ${
+        //     collapsed ? "w-16" : "w-64"}`}>
+                <aside className={`h-full transition-all duration-300 
+                    ${collapsed ? "w-16" : "w-64"} 
+                    bg-gray-900 dark:bg-black text-white`}>
+                {/* <div className="flex items-center gap-3 mb-6">
                     <Menu/>
                     {!collapsed && <h2 className="text-xl font-bold">Dashboard</h2> }
                 </div>
 
                 <nav className="flex flex-col gap-2">
-                    
-                </nav>
+                    <SidebarItem 
+                    href="/dashboard"
+                    icon={<Home/>}
+                    label = "Home"
+                    collapsed={collapsed} 
+                    />
+                    <SidebarItem
+                        href="/dashboard/users"
+                        icon={<User />}
+                        label="Users"
+                        collapsed={collapsed}
+                    />
+                    <SidebarItem
+                        href="/dashboard/settings"
+                        icon={<Settings />}
+                        label="Settings"
+                        collapsed={collapsed}
+                    />
+                </nav> */}
+
+                <div className="p-4">
+                    <div className="flex items-center gap-3 mb-6">
+                    <Menu />
+                    {!collapsed && <h2 className="text-xl font-bold">Dashboard</h2>}
+                    </div>
+
+                    <nav className="flex flex-col gap-2">
+                    <SidebarItem
+                        href="/dashboard"
+                        icon={<Home />}
+                        label="Home"
+                        collapsed={collapsed}
+                    />
+                    <SidebarItem
+                        href="/dashboard/users"
+                        icon={<User />}
+                        label="Users"
+                        collapsed={collapsed}
+                    />
+                    <SidebarItem
+                        href="/dashboard/settings"
+                        icon={<Settings />}
+                        label="Settings"
+                        collapsed={collapsed}
+                    />
+                    </nav>
+                </div>
             </aside>
     )
     // return(
@@ -73,5 +121,15 @@ function SidebarItem({
     label : string;
     collapsed : boolean
 }){
-    
+    return(
+        // <Link href={href} className="flex items-center gap-3 px-3 py-2 rounded hover:bg-gray-700">
+            <Link href={href}  className="
+    flex items-center gap-3 px-3 py-2 rounded
+    hover:bg-gray-700 dark:hover:bg-gray-800
+  "
+>
+            {icon}
+            {!collapsed && <span>{label}</span>}
+        </Link>
+    )
 }
