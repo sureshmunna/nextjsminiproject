@@ -21,7 +21,8 @@ export default function LoginPage(){
             setError(error.message);
         }
         else{
-            router.push("/dashboard")
+            router.push("/dashboard");
+            //window.location.href = "/dashboard";
         }
     };
     return(

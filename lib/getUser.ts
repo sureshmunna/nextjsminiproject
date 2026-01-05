@@ -36,6 +36,6 @@ export async function getUser() {
 //Combine both steps into ONE line (your code)
 
 //so it becomes const { data: { user } } = await supabase.auth.getUser(); this is called nested destructuring.
-// 👉 Go into data
-// 👉 Pick user
-// 👉 Put it into a variable called user
+//  Go into data
+//  Pick user
+//  Put it into a variable called user
