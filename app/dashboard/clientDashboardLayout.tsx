@@ -5,6 +5,7 @@ import Sidebar from "@/Components/Sidebar";
 import { SidebarProvider } from "@/Components/SidebarContext";
 import { ThemeProvider } from "@/Components/ThemeContext";
 import { ReactNode } from "react";
+import { Toaster } from "sonner";
 
 export default function ClientDashboardLayout({
   children,
@@ -21,6 +22,7 @@ export default function ClientDashboardLayout({
             <Navbar />
             <main className="p-6 flex-1 overflow-y-auto bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
               {children}
+              <Toaster position="top-center" richColors />
             </main>
           </div>
         </div>

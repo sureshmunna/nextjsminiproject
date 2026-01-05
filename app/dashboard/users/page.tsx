@@ -1,3 +1,4 @@
+import { getProfiles } from "@/lib/getProfiles";
 import { setInterval } from "timers/promises";
 
 type User = {
@@ -25,11 +26,13 @@ async function getUsers():Promise<User []> {
 }
 
 export default async function UserPage(){
-    const users = await getUsers();
+    const APIusers = await getUsers();
+
+    const users = await getProfiles();
 
     return (
         <div>
-            <h1 className="text-2xl font-bold mb-5">Users</h1>
+            <h1 className="text-2xl font-bold mb-5">API Users</h1>
             <div className="bg-white dark:bg-gray-800 rounded shadow">
                 <table className="w-full border-collapse">
                     <thead className="bg-gray-100 dark:bg-gray-700">
@@ -39,7 +42,7 @@ export default async function UserPage(){
                         </tr>
                     </thead>
                     <tbody>
-                        {users.map((user)=>(
+                        {APIusers.map((user)=>(
                             <tr key={user.id} className="border-t dark:border-gray-700">
                                 <td className="p-3">{user.name}</td>
                                 <td className="p-3"> {user.email} </td>
@@ -48,6 +51,26 @@ export default async function UserPage(){
                     </tbody>
                 </table>
             </div>
+
+            <h2 className="text-2xl font-bold mb-4">Supabase Users</h2>
+            <table className="bg-gray-100 dark:bg-gray-800">
+                <thead>
+                    <tr>
+                        <th className="p-2 text-left">Email</th>
+                        <th className="p-2 text-left">Name</th>
+                        <th className="p-2 text-left">Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {users.map((u)=>(
+                        <tr key={u.id} className="border-t">
+                            <td className="p-2">{u.email}</td>
+                            <td className="p-2">{u.full_name ?? "_"}</td>
+                            <td className="p-2">{u.role}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
     )
 }
