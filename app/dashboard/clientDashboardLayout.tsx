@@ -4,14 +4,18 @@ import Navbar from "@/Components/Navbar";
 import Sidebar from "@/Components/Sidebar";
 import { SidebarProvider } from "@/Components/SidebarContext";
 import { ThemeProvider } from "@/Components/ThemeContext";
+import { getCurrentUserRole } from "@/lib/getCurrentUserRoles";
 import { ReactNode } from "react";
 import { Toaster } from "sonner";
 
 export default function ClientDashboardLayout({
   children,
+
 }: {
   children: ReactNode;
+  
 }) {
+    //const role = await getCurrentUserRole();
   return (
     <ThemeProvider>
       <SidebarProvider>

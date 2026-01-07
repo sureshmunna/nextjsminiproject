@@ -71,6 +71,8 @@ export default async function UserPage(){
                     ))}
                 </tbody>
             </table>
+            
         </div>
+        
     )
 }

@@ -7,3 +7,92 @@ create table profiles (
   primary key (id)
 );
 ---------------------------------------------------------------------------------------------
+
+
+=>alter table profiles enable row level security;
+
+Q)What is Row Level Security (RLS)?
+
+Row Level Security (RLS) is a PostgreSQL feature
+that controls who can see or modify which rows in a table.
+
+Not:
+
+Which table ❌
+But:
+
+Which rows inside the table ✅
+
+Q)What happens WITHOUT RLS (very dangerous ⚠️)
+
+If RLS is disabled:
+
+select * from profiles;
+
+
+From the frontend:
+
+Any logged-in user can read ALL profiles
+
+Any user can update ANY profile
+
+Massive security hole ❌
+
+Supabase will block this only if RLS is enabled.
+
+
+
+->'enable row level security' tells PostgreSQL
+“Do not allow any access to rows unless a policy explicitly allows it.”
+
+------------------------------------------------------------------------------
+create policy "Users can read own profile"
+on profiles
+for select 
+using (auth.uid() = id);
+
+
+create policy "Users can insert own profile"
+on profiles
+for insert
+with check (auth.uid() = id);
+
+
+create policy "Users can update own profile"
+on profiles
+for 	
+using (auth.uid() = id);
+
+
+=> Optional (didn't run) 
+-------
+create function public.handle_new_user()
+returns trigger as $$
+begin
+  insert into public.profiles (id, email)
+  values (new.id, new.email);
+  return new;
+end;
+$$ language plpgsql security definer;
+
+create trigger on_auth_user_created
+after insert on auth.users
+for each row execute procedure public.handle_new_user();
+------------------------------------------------------------------------------------------------------------------------------
+
+
+create function public.handle_new_user()
+returns trigger as $$
+begin
+  insert into public.profiles (id, email)
+  values (new.id, new.email);
+  return new;
+end;
+$$ language plpgsql security definer;
+
+create trigger on_auth_user_created
+after insert on auth.users
+for each row execute procedure public.handle_new_user();
+
+
+

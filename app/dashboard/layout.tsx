@@ -6,14 +6,15 @@ import { getUser } from "@/lib/getUser";
 import { ReactNode } from "react";
 import ClientDashboardLayout from "./clientDashboardLayout";
 import { redirect } from "next/navigation";
+import { getCurrentUserRole } from "@/lib/getCurrentUserRoles";
 
 export default async function DashboardLayout({children} :{children : ReactNode}){
         const user = await getUser();
             if (!user) {
                 redirect("/login");
             }
-
-   return <ClientDashboardLayout>{children}</ClientDashboardLayout>;
+        //const role = await getCurrentUserRole();
+   return <ClientDashboardLayout >{children}</ClientDashboardLayout>;
        //return(
         // <SidebarProvider>
         //     <div className="flex h-screen">

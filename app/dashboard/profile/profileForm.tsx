@@ -30,7 +30,7 @@ export default function ProfileForm({profile} :{profile :any}){
                 <input
                 disabled
                 value={profile.email}
-                className="w-full p-2 border rounded bg-gray-100"
+                className="w-full p-2 border rounded bg-gray-100 dark:bg-gray-800"
                 />
             </div>
 
@@ -39,7 +39,7 @@ export default function ProfileForm({profile} :{profile :any}){
                 <input
                 name="full_name"
                 defaultValue={profile.full_name}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border rounded dark:bg-gray-800"
                 />
             </div>
 

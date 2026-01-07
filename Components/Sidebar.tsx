@@ -1,6 +1,6 @@
 "use client"
 
-import { Home, Menu, Settings, User } from "lucide-react"
+import { Home, Menu, Settings, Shield, User } from "lucide-react"
 import Link from "next/link"
 import { createContext, ReactNode, useState } from "react";
 import { useSidebar } from "./SidebarContext";
@@ -82,6 +82,14 @@ export default function Sidebar(){
                         label="Settings"
                         collapsed={collapsed}
                     />
+                    {/* {role ==='admin' &&(
+                            <SidebarItem href="/dashboard/admin"
+                            icon = {<Shield/>}
+                            label="Admin"
+                            collapsed ={collapsed}
+                            />
+                        )
+                    } */}
                     </nav>
                 </div>
             </aside>
@@ -124,10 +132,10 @@ function SidebarItem({
     return(
         // <Link href={href} className="flex items-center gap-3 px-3 py-2 rounded hover:bg-gray-700">
             <Link href={href}  className="
-    flex items-center gap-3 px-3 py-2 rounded
-    hover:bg-gray-700 dark:hover:bg-gray-800
-  "
->
+                flex items-center gap-3 px-3 py-2 rounded
+                hover:bg-gray-700 dark:hover:bg-gray-800
+            "
+            >
             {icon}
             {!collapsed && <span>{label}</span>}
         </Link>
