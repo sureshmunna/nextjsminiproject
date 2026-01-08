@@ -28,20 +28,20 @@ export default async function AdminUserPage(){
     return(
         <div>
             <h1 className="text-xl font-bold mb-4">Users</h1>
-            <table className="w-full border">
-                <thead>
-                    <tr>
-                        <th>Email</th>
-                        <th>Name</th>
-                        <th>Role</th>
+            <table className=" border-collapse bg-gray-100 dark:bg-gray-800">
+                <thead className="bg-gray-100 dark:bg-gray-700">
+                    <tr className="border-t dark:border-gray-700">
+                        <th className="p-2 text-left">Email</th>
+                        <th className="p-2 text-left">Name</th>
+                        <th className="p-2 text-left">Role</th>
                     </tr>
                 </thead>
                 <tbody>
                     {users?.map((u)=>(
-                        <tr key={u.id}>
-                            <td> {u.email} </td>
-                            <td> {u.full_name} </td>
-                            <td> {u.role} </td>
+                        <tr key={u.id} className="border-t dark:border-gray-700">
+                            <td className="p-2"> {u.email} </td>
+                            <td className="p-2"> {u.full_name} </td>
+                            <td className="p-2"> {u.role} </td>
                         </tr>
                     ))}
                 </tbody>

@@ -22,7 +22,7 @@ import { useSidebar } from "./SidebarContext";
 //     )
 // }
 
-export default function Sidebar(){
+export default function Sidebar({role }: {role :string| null}){
     const {collapsed} = useSidebar();
 
     return (
@@ -82,14 +82,22 @@ export default function Sidebar(){
                         label="Settings"
                         collapsed={collapsed}
                     />
-                    {/* {role ==='admin' &&(
+                    {role ==='admin' &&(
                             <SidebarItem href="/dashboard/admin"
                             icon = {<Shield/>}
                             label="Admin"
                             collapsed ={collapsed}
                             />
                         )
-                    } */}
+                    }
+                    {role ==='admin' &&(
+                            <SidebarItem href="/dashboard/admin/users"
+                            icon = {<User />}
+                            label="Admin Users"
+                            collapsed ={collapsed}
+                            />
+                        )
+                    }
                     </nav>
                 </div>
             </aside>

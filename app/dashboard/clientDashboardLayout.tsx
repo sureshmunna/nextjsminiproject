@@ -10,17 +10,17 @@ import { Toaster } from "sonner";
 
 export default function ClientDashboardLayout({
   children,
-
+  role,
 }: {
   children: ReactNode;
-  
+  role : string | null ;
 }) {
     //const role = await getCurrentUserRole();
   return (
     <ThemeProvider>
       <SidebarProvider>
         <div className="flex h-screen bg-gray-100 dark:bg-gray-900">
-          <Sidebar />
+          <Sidebar role = {role} />
 
           <div className="flex flex-col flex-1">
             <Navbar />

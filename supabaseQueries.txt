@@ -96,3 +96,59 @@ for each row execute procedure public.handle_new_user();
 
 
 
+---------------------------------------------------------------------------------------------------------------------------------
+
+create policy "Admin can read all profiles"
+on profiles 
+for select 
+using (
+  exists(
+    select 1 from profiles p
+    where p.id = auth.uid()
+    and p.role = 'admin'
+  )
+);
+
+
+create policy "Admin can update roles"
+on profiles
+for update 
+using (
+  exists(
+    select 1 from profiles p
+    where p.id = auth.uid()
+    and p.role = 'admin'
+  )
+);
+
+==>this will not work
+create policy "Admin can read all profiles"
+on profiles
+for select
+using (
+  (auth.jwt() ->> 'role') = 'admin'
+);
+
+
+create or replace function public.is_admin()
+  returns boolean
+  language sql
+  security definer 
+  stable
+  as $$
+  select exists (
+    select 1 
+    from public.profiles
+    where id = auth.uid()
+    and role = 'admin'
+  );
+  $$;
+
+  create policy "Admin can read all profiles"
+  on profiles
+  for select 
+  using (public.is_admin());
+
+
+
+
