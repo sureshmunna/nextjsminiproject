@@ -21,6 +21,9 @@ const handleLogout = async () => {
   await supabase.auth.signOut();
   window.location.href = "/login";
 };
+const handleProfile = async () =>{
+  window.location.href = "/dashboard/profile"
+}
   return (
     // <header className="w-full h-14 bg-white shadow flex items-center justify-between px-4">
       <header className="
@@ -67,7 +70,7 @@ const handleLogout = async () => {
                   dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700
                 "
               >
-            <button className="dropdown-item hover:bg-gray-100 dark:hover:bg-gray-700">
+            <button className="dropdown-item hover:bg-gray-100 dark:hover:bg-gray-700" onClick={handleProfile}>
               <User size={16} /> Profile
             </button>
             <button className="dropdown-item hover:bg-gray-100 dark:hover:bg-gray-700">
