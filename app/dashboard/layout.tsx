@@ -13,8 +13,8 @@ export default async function DashboardLayout({children} :{children : ReactNode}
             if (!user) {
                 redirect("/login");
             }
-        const role = await getCurrentUserRole();
-   return <ClientDashboardLayout role = {role} >{children}</ClientDashboardLayout>;
+        const data = await getCurrentUserRole();
+   return <ClientDashboardLayout user = {data}>{children}</ClientDashboardLayout>;
        //return(
         // <SidebarProvider>
         //     <div className="flex h-screen">

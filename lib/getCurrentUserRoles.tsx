@@ -11,15 +11,18 @@ export async function getCurrentUserRole(){
         {
             cookies : {
                 getAll:()=>cookieStore.getAll(),
-                setAll:(cookie)=>
-                    cookie.forEach(({name,value,options})=>
-                    cookieStore.set(name,value,options)),
+                // setAll:(cookie)=>
+                //     cookie.forEach(({name,value,options})=>
+                //     cookieStore.set(name,value,options)),
             },
         }
     );
     const{data:{user},}=await supabase.auth.getUser();
     if(!user) return null;
 
-    const {data} = await supabase.from("profiles").select("role").eq("id",user.id).single();
-    return data?.role
+    const {data,error} = await supabase.from("profiles").select("*").eq("id",user.id).single();
+    if (error) {
+    return null; // or throw error
+  }
+    return data;
 }

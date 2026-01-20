@@ -8,22 +8,29 @@ import { getCurrentUserRole } from "@/lib/getCurrentUserRoles";
 import { ReactNode } from "react";
 import { Toaster } from "sonner";
 
+type Profile = {
+  id: string;
+  email: string | null;
+  full_name: string | null;
+  role: string;
+  created_at: string;
+};
 export default function ClientDashboardLayout({
   children,
-  role,
+  user,
 }: {
   children: ReactNode;
-  role : string | null ;
+    user : Profile ;
 }) {
     //const role = await getCurrentUserRole();
   return (
     <ThemeProvider>
       <SidebarProvider>
         <div className="flex h-screen bg-gray-100 dark:bg-gray-900">
-          <Sidebar role = {role} />
+          <Sidebar role = {user.role} />
 
           <div className="flex flex-col flex-1">
-            <Navbar />
+            <Navbar full_name= {user.full_name} />
             <main className="p-6 flex-1 overflow-y-auto bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
               {children}
               <Toaster position="top-center" richColors />

@@ -8,7 +8,7 @@ import { useTheme } from "./ThemeContext";
 import { supabase } from "@/lib/supabaseClient";
 
 
-export default function Navbar() {
+export default function Navbar({full_name} :{full_name :string|null}) {
   const [open, setOpen] = useState(false);
   const { toggle } = useSidebar();
   const {theme,toggleTheme} =useTheme();  
@@ -55,7 +55,7 @@ const handleProfile = async () =>{
           className="flex items-center gap-2"
         >
           <Avatar src={user.avatarUrl} />
-          <span className="text-sm font-medium">{user.name}</span>
+          <span className="text-sm font-medium">{full_name}</span>
           <ChevronDown size={16} />
         </button>
         </div>
