@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 export default async function AdminUserPage(){
     const role = await getCurrentUserRole();
 
-    if(role !=='admin')
+    if(role.role !=="admin")
         redirect("/dashboard");
 
     const cookieStore = await cookies();
